@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {useHistory} from "react-router";
+import {useHistory} from "react-router-dom";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
-import AsyncSelect from "react-select/async";
-import Select from "react-select";
+
 
 function NewLog({user}) {
     const [title, setTitle] = useState("My Awesome Exercise");
@@ -15,20 +14,33 @@ function NewLog({user}) {
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
+     const [optionValue, setOptionValue] = useState("");
+  const handleSelect = (e) => {
+    console.log(e.target.value);
+    setExerciseId(e.target.value);
+  };
 
-    const getExercises = () => {
-        return fetch("/exercises", {method: "GET"})
-            .then((data) => {
-                // console.log("data", data)
-                return null
-                // data.map((exercise) => {
-                //     return {
-                //         value: exercise.id,
-                //         label: exercise.title
-                //     };
-                // })
-            })
-    }
+    // const getExercises = () => {
+    //     return fetch("/exercises", {method: "GET"})
+    //         .then((data) => {
+    //             // console.log("data", data)
+    //             return null
+    //             // data.map((exercise) => {
+    //             //     return {
+    //             //         value: exercise.id,
+    //             //         label: exercise.title
+    //             //     };
+    //             // })
+    //         })
+    // }
+
+    const [exercises, setExercises] = useState([]);
+
+    useEffect(() => {
+        fetch("/exercises")
+            .then((r) => r.json())
+            .then(setExercises);
+    }, []);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -57,17 +69,17 @@ function NewLog({user}) {
         <Wrapper>
             <WrapperChild>
                 <h2>Create Log</h2>
+
+               
                 <form onSubmit={handleSubmit}>
                     <FormField>
-                        <Label htmlFor="exerciseID">Exercise ID</Label>
-                        <Input
-                            type="number"
-                            id="exerciseID"
-                            value={exerciseId}
-                            onChange={(e) => setExerciseId(e.target.value)}
-                        />
+                    <select onChange={handleSelect}>
+                        {exercises.map(item => {
+                          return (<option value={item.id} key={item.id} >Logging my {item.title}</option>);
+                     })}
+                    </select>
                     </FormField>
-                    <Select/>
+                    
                     <FormField>
                         <Label htmlFor="repetitionCount">Repetition count</Label>
                         <Input
@@ -88,7 +100,7 @@ function NewLog({user}) {
                     </FormField>
                     <FormField>
                         <Button color="primary" type="submit">
-                            {isLoading ? "Loading..." : "Submit Exercise"}
+                            {isLoading ? "Loading..." : "Submit Log"}
                         </Button>
                     </FormField>
                     <FormField>

@@ -42,9 +42,7 @@ function LogList() {
                                 <p>
                                     Repetion type: {log.repetition_type}
                                 </p>
-                                <p>
-                                    Repetion count: {log.repetition_type}
-                                </p>
+                    
                                 <p>
                                     Was made at: {log.log_date}
                                 </p>

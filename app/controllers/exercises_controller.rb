@@ -10,7 +10,7 @@ class ExercisesController < ApplicationController
       end
     
       def update
-        @exercise.update(**exercise_params)
+        exercise.update(**exercise_params)
       end
     
       def create
@@ -18,13 +18,13 @@ class ExercisesController < ApplicationController
       end
     
       def destroy
-        @exercise.destroy
+        exercise.destroy
       end
     
       private
     
       def exercise
-        @exercise = Exercise.find(params[:id])
+        Exercise.find(params[:id])
       end
     
       def exercise_params

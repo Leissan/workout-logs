@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_05_141000) do
+ActiveRecord::Schema.define(version: 2023_03_05_141246) do
 
   create_table "exercises", force: :cascade do |t|
     t.string "title"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 2023_03_05_141000) do
     t.integer "repetition_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "exercise_id"
+    t.index ["exercise_id"], name: "index_logs_on_exercise_id"
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +40,6 @@ ActiveRecord::Schema.define(version: 2023_03_05_141000) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "logs", "exercises"
+  add_foreign_key "logs", "users"
 end

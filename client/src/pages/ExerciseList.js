@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import {Box, Button} from "../styles";
+import { Box, Button } from "../styles";
 
-function ExerciseList() {
-    const [exercises, setExercises] = useState([]);
-
-    useEffect(() => {
-        fetch("/exercises")
-            .then((r) => r.json())
-            .then(setExercises);
-    }, []);
-
+function ExerciseList({user}) {
+  
     return (
         <>
             <Wrapper>
@@ -23,7 +16,7 @@ function ExerciseList() {
                 </div>
 
                  {
-                 exercises.map((exercise) => (
+                 user.exercises.map((exercise) => (
                         <Exercise key={exercise.id}>
                             <Box>
                                 <h2>{exercise.title}</h2>

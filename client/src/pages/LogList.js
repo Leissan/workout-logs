@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {Box, Button} from "../styles";
 
-function LogList() {
+function LogList({user, setUser}) {
     const [logs, setLogs] = useState([]);
     const [read, setReadMore] = useState(false)
 
@@ -23,6 +23,7 @@ function LogList() {
         fetch(`/logs/${id}`, {method: "DELETE"})
             .then((r) => r.json())
             .then(setLogs);
+            // .then(setUser({...user, logs: [...logs, ??????]}))
     }
 
     return (
@@ -33,16 +34,16 @@ function LogList() {
                         Add new log
                     </Button>
                 </div>
-
-                {logs.length > 0 ? (
-                    logs.map((log) => (
+               //user.exercise.map then inside of it exercise.logs.map
+                {user.logs.length > 0 ? (
+                    user.logs.map((log) => (
                         <Log key={log.id}>
                             <Box>
                                 <h2>{log.title}</h2>
-                                {read ? <ReactMarkdown>{log.description}</ReactMarkdown> : null}
+                                {/* {read ? <ReactMarkdown>{log.description}</ReactMarkdown> : null}
                                 <Button onClick={readMore}>
                                     {read ? "Hide the description" : "Show the description"}
-                                </Button>
+                                </Button> */}
                                 <p>
                                     Repetion count: {log.repetition_count}
                                 </p>

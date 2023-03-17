@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
 
-function UpdateLog() {
+function UpdateLog({user, setUser}) {
     // const [exercise_id, setExerciseId] = useState(null)
     // const [repetitionCount, setRepetitionCount] = useState(null)
     // const [repetitionType, setRepetitionType] = useState(null)
@@ -25,7 +25,8 @@ function UpdateLog() {
                 // console.log(log.description)
             });
     }, [])
-
+    //use id to find the appropriate log -> user.logs, find the log there
+    // map  with if else, if this is the one i wanna chnage : return obj
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);

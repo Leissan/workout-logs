@@ -1,25 +1,28 @@
 class ExercisesController < ApplicationController
 
+    #
+
       def index
         exercises = Exercise.all
-        render json: exercises.to_json, status: :ok
+        render json: exercises, status: :ok
       end
     
       def show
-        render json: exercise.to_json
+        render json: exercise, status: :ok
       end
     
-      def update
-        exercise.update(**exercise_params)
-      end
+      # def update
+      #   exercise.update(exercise_params)
+      # end
     
       def create
-        Exercise.create(**exercise_params)
+        exercise = Exercise.create(exercise_params)
+        render json: exercise, status: :ok
       end
     
-      def destroy
-        exercise.destroy
-      end
+      # def destroy
+      #   exercise.destroy
+      # end
     
       private
     

@@ -10,17 +10,27 @@ import UpdateLog from "../pages/UpdateLog";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [exer, setExer] = useState("")
 
-  useEffect(() => {
+  useEffect(() => {  
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
-    });
-  }, []);
+    })
+;  }, []);
+
+  // useEffect(() => {  
+  //   fetch("/exercises").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then(() => setExer());
+  //     }
+  //   });
+  // }, []);
 
   if (!user) return <Login onLogin={setUser} />;
+  console.log(user)
 
   return (
     <>
@@ -28,19 +38,19 @@ function App() {
       <main>
         <Switch>
           <Route path="/new_exercise">
-            <NewExercise user={user} />
+            <NewExercise user={user} setUser={setUser} />
           </Route>
           <Route path="/exercises">
             <ExerciseList user={user} />
           </Route>
           <Route path="/new_logs">
-            <NewLog user={user} />
+            <NewLog user={user} setUser={setUser} />
           </Route>
           <Route path="/update_log/:id">
-            <UpdateLog/>
+            <UpdateLog user={user} setUser={setUser} />
           </Route>
           <Route path="/history">
-            <LogList user={user} />
+            <LogList user={user} setUser={setUser} />
           </Route>
           <Route path="/">
             <LogList user={user} />

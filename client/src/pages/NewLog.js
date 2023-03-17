@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
 
 
-function NewLog({user}) {
+function NewLog({user, setUser}) {
     const [title, setTitle] = useState("My Awesome Exercise");
     const [description, setDescription] = useState("");
     const [exerciseId, setExerciseId] = useState(null)
@@ -15,32 +15,13 @@ function NewLog({user}) {
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
      const [optionValue, setOptionValue] = useState("");
+
   const handleSelect = (e) => {
     console.log(e.target.value);
     setExerciseId(e.target.value);
   };
 
-    // const getExercises = () => {
-    //     return fetch("/exercises", {method: "GET"})
-    //         .then((data) => {
-    //             // console.log("data", data)
-    //             return null
-    //             // data.map((exercise) => {
-    //             //     return {
-    //             //         value: exercise.id,
-    //             //         label: exercise.title
-    //             //     };
-    //             // })
-    //         })
-    // }
 
-    const [exercises, setExercises] = useState([]);
-
-    useEffect(() => {
-        fetch("/exercises")
-            .then((r) => r.json())
-            .then(setExercises);
-    }, []);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -58,7 +39,14 @@ function NewLog({user}) {
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
-                history.push("/history");
+                r.json().then((newlog) => {
+                const logs = user.logs
+                setRepetitionCount("")
+                setRepetitionType("")
+                setUser({...user, logs: [...logs, newlog]})
+                console.log(newlog)
+                })
+
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
@@ -74,7 +62,7 @@ function NewLog({user}) {
                 <form onSubmit={handleSubmit}>
                     <FormField>
                     <select onChange={handleSelect}>
-                        {exercises.map(item => {
+                        {user.exercises.map(item => {
                           return (<option value={item.id} key={item.id} >Logging my {item.title}</option>);
                      })}
                     </select>
@@ -110,10 +98,6 @@ function NewLog({user}) {
                     </FormField>
                 </form>
             </WrapperChild>
-            {/*<WrapperChild>*/}
-            {/*    <h1>{title}</h1>*/}
-            {/*    <ReactMarkdown>{description}</ReactMarkdown>*/}
-            {/*</WrapperChild>*/}
         </Wrapper>
     );
 }

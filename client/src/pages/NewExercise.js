@@ -4,18 +4,9 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
-function NewExercise({ user }) {
+function NewExercise({ user, setUser }) {
     const [title, setTitle] = useState("My Awesome Exercise");
-    const [description, setDescription] = useState(`Here's how you make it.
-  
-## Exercise
-
-Push ups
-
-## Instructions
-
-Push ups a conditioning exercise performed in a prone position by raising and lowering the body with the straightening and bending of the arms while keeping the back straight and supporting the body on the hands and toes
-  `);
+    const [description, setDescription] = useState(`Here's how you make it.`);
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
@@ -29,13 +20,21 @@ Push ups a conditioning exercise performed in a prone position by raising and lo
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                title,
-                description,
+                title: title,
+                description: description,
             }),
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
-                history.push("/exercises");
+                r.json().then ((newexercise) => {
+                const exercises = user.exercises
+               setTitle("")
+               setDescription("")
+               setUser({...user, exercises: [...exercises, newexercise]})
+               console.log(newexercise)
+                 } )
+              
+               
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }

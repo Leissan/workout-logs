@@ -1,4 +1,7 @@
 class LogsController < ApplicationController
+
+    #before_action :authorize
+
     def index
         logs = Log.where(user_id: current_user.id)
         list = []
@@ -17,7 +20,7 @@ class LogsController < ApplicationController
           }
         end
     
-        render json: list.to_json
+        render json: list
     end
     
     def show
@@ -37,21 +40,31 @@ class LogsController < ApplicationController
     
     def update
         Log.find(params[:id]).update(log_date: DateTime.now, **logs_params)
+        render json: log, status: :ok
     end
+
     
     def create
-        Log.create(user_id: current_user.id, log_date: DateTime.now, **logs_params)
+        log = Log.create(user_id: current_user.id, log_date: DateTime.now, **logs_params)
+        render json: log, status: :ok
     end
     
     def destroy
-        log.destroy
-        render :index
+        if log
+            log.destroy
+            head :no_content
+        else
+            render json: { error: "Log not found" }, status: :not_found
+        end
+    
     end
       
     private
     
     def log
-        Log.find(params[:id])
+        
+        #Log.find(params[:id])
+        current_user.logs.find(params[:id])
     end
     
     def logs_params

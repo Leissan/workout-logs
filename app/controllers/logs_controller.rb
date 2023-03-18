@@ -1,6 +1,6 @@
 class LogsController < ApplicationController
 
-    before_action :authorize
+   # before_action :authorize
 
     def index
         logs = Log.where(user_id: current_user.id)

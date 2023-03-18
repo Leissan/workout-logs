@@ -21,13 +21,6 @@ function App() {
     })
 ;  }, []);
 
-  // useEffect(() => {  
-  //   fetch("/exercises").then((r) => {
-  //     if (r.ok) {
-  //       r.json().then(() => setExer());
-  //     }
-  //   });
-  // }, []);
 
   if (!user) return <Login onLogin={setUser} />;
   console.log(user)

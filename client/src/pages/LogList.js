@@ -36,14 +36,17 @@ function LogList({user, setUser}) {
                 </div>
                //user.exercise.map then inside of it exercise.logs.map
                 {user.logs.length > 0 ? (
-                    user.logs.map((log) => (
-                        <Log key={log.id}>
+                    user.exercises.map((exercise) => (
+                        <Log key={exercise.id}>
                             <Box>
-                                <h2>{log.title}</h2>
+                    
+                                <h2>{exercise.title}</h2>
                                 {/* {read ? <ReactMarkdown>{log.description}</ReactMarkdown> : null}
                                 <Button onClick={readMore}>
                                     {read ? "Hide the description" : "Show the description"}
                                 </Button> */}
+                                {exercise.logs.map((log) => (
+                                <>
                                 <p>
                                     Repetion count: {log.repetition_count}
                                 </p>
@@ -54,12 +57,14 @@ function LogList({user, setUser}) {
                                 <p>
                                     Was made at: {log.log_date}
                                 </p>
+                                
                                 <Button as={Link} onClick={() => deleteLog(log.id)}>
                                     Delete log
                                 </Button>
                                 <Button as={Link} to={`/update_log/${log.id}`}>
                                     Update log
                                 </Button>
+                                </>))}
                             </Box>
                         </Log>
                     ))

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
+import {Link} from "react-router-dom";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
 
 
@@ -67,7 +68,12 @@ function NewLog({user, setUser}) {
                      })}
                     </select>
                     </FormField>
-                    
+                    <h3>Don't see the exercise you want to log? Create it here! </h3>
+                    <div style={{marginBottom: 24}}>
+                        <Button as={Link} to="/new_exercise">
+                            Add new exercise
+                        </Button>
+                    </div> 
                     <FormField>
                         <Label htmlFor="repetitionCount">Repetition count</Label>
                         <Input

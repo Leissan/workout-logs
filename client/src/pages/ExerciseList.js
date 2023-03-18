@@ -9,11 +9,11 @@ function ExerciseList({user}) {
     return (
         <>
             <Wrapper>
-                <div style={{marginBottom: 24}}>
+                {/* <div style={{marginBottom: 24}}>
                     <Button as={Link} to="/new_exercise">
                         Add new exercise
                     </Button>
-                </div>
+                </div> */}
 
                  {
                  user.exercises.map((exercise) => (

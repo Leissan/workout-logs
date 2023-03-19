@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import NewExercise from "../pages/NewExercise";
 import ExerciseList from "../pages/ExerciseList";
 import NewLog from "../pages/NewLog";
+import Show from "../pages/Show";
 import LogList from "../pages/LogList";
 import UpdateLog from "../pages/UpdateLog";
 
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/update_log/:id">
             <UpdateLog user={user} setUser={setUser} />
+          <Route path="/exercises/:id">
+            <Show user={user} setUser={setUser}/>
+          </Route>
           </Route>
           <Route path="/history">
             <LogList user={user} setUser={setUser} />

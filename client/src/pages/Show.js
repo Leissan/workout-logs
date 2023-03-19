@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import ReactMarkdown from "react-markdown";
-import {Link} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import styled from "styled-components";
-import {Box, Button} from "../styles";
+import {Box, Button, Error, FormField, Input, Label} from "../styles";
+import Logs from "./Logs";
 
-function LogList({user, setUser}) {
+function Show({user, setUser}) {
     const [logs, setLogs] = useState([]);
     const [read, setReadMore] = useState(false)
 
@@ -80,6 +81,4 @@ const Log = styled.article`
   margin-bottom: 24px;
 `;
 
-export default LogList;
-
-////user.exercise.map then inside of it exercise.logs.map
+export default Show;

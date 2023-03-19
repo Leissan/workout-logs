@@ -1,6 +1,6 @@
 class LogsController < ApplicationController
 
-   # before_action :authorize
+   before_action :authorize
 
     def index
         logs = Log.where(user_id: current_user.id)
@@ -63,8 +63,7 @@ class LogsController < ApplicationController
     private
 
     def authorize
-        return render json: {error: "Not authorized"}, status: :unauthorized
-        unless session.include? :user_id
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
     
     def log

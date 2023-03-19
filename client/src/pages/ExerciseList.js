@@ -9,22 +9,16 @@ function ExerciseList({user}) {
     return (
         <>
             <Wrapper>
-                {/* <div style={{marginBottom: 24}}>
-                    <Button as={Link} to="/new_exercise">
-                        Add new exercise
-                    </Button>
-                </div> */}
-
+            
                  {
                  user.exercises.map((exercise) => (
-                        <Exercise key={exercise.id}>
-                            <Box>
-                                
-                                <h2>{<Link to = {`/exercises/${exercise.id}`}>{exercise.title}</Link>}</h2>
-                                
-                                <ReactMarkdown>{exercise.description}</ReactMarkdown>
-                            </Box>
-                        </Exercise>
+                       
+                     <Exercise key={exercise.id}>
+                         <Box>
+                             <h2>{<Link to = {`/exercises/${exercise.id}`}>{exercise.title}</Link>}</h2>
+                             <ReactMarkdown>{exercise.description}</ReactMarkdown>
+                         </Box>
+                     </Exercise>
                     ))
                     } 
 

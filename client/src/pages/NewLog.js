@@ -23,7 +23,6 @@ function NewLog({user, setUser}) {
   };
 
 
-
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
@@ -57,9 +56,7 @@ function NewLog({user, setUser}) {
     return (
         <Wrapper>
             <WrapperChild>
-                <h2>Create Log</h2>
-
-               
+                <h2>Create Log</h2>  
                 <form onSubmit={handleSubmit}>
                     <FormField>
                     <select onChange={handleSelect}>

@@ -50,11 +50,15 @@ function UpdateLog({user, setUser}) {
         });
     }
 
+ //a way to pull onChnage for every type of field i have below 
+ //for example onChange={onChange("exercise_id")}
     const onChange = (field) => (event) => {
 
         setLog({ [field]: event.target.value })
         return event
     }
+
+   
 
     return (
         <Wrapper>

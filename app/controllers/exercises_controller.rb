@@ -1,7 +1,5 @@
 class ExercisesController < ApplicationController
-
-    #
-
+  
       def index
         exercises = Exercise.all
         render json: exercises, status: :ok
@@ -11,10 +9,7 @@ class ExercisesController < ApplicationController
         render json: exercise, status: :ok
       end
     
-      # def update
-      #   exercise.update(exercise_params)
-      # end
-    
+     
       def create
         exercise = Exercise.create(exercise_params)
         render json: exercise, status: :ok

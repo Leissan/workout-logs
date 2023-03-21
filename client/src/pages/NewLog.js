@@ -44,6 +44,12 @@ function NewLog({user, setUser}) {
                 setRepetitionCount("")
                 setRepetitionType("")
                 setUser({...user, logs: [...logs, newlog]})
+                // setUser({...user,
+                //     exercises: {
+                //         ...user.exercises,
+                //         logs: newlog
+                //     } })
+            
                 console.log(newlog)
                 })
 

@@ -4,26 +4,26 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {Box, Button} from "../styles";
 
+
 function LogList({user, setUser}) {
-    const [logs, setLogs] = useState([]);
-    const [read, setReadMore] = useState(false)
-
-    useEffect(() => {
-        fetch("/logs")
-            .then((r) => r.json())
-            .then(setLogs);
-    }, []);
-
-    const readMore = () => {
-        return setReadMore(!read)
-    }
-
+   
     const deleteLog = (id) => {
         console.log("?????", id)
         fetch(`/logs/${id}`, {method: "DELETE"})
-            .then((r) => r.json())
-            .then(setLogs);
-            // .then(setUser({...user, logs: [...logs, ??????]}))
+         
+        handleDeleteLog(id)
+            
+    }
+
+    function handleDeleteLog(id) {
+        const updatedLogs = user.logs.filter((log) => log.id !== id)
+        console.log(user.logs)
+        // setUser({...user,
+        //     exercises: {
+        //         ...user.exercises,
+        //         logs: updatedLogs
+        //     } })
+        setUser({...user, logs: updatedLogs})
     }
 
     return (
@@ -37,11 +37,14 @@ function LogList({user, setUser}) {
                
                 {user.logs.length > 0 ? (
                     user.exercises.map((exercise) => (
+                        <>
+                        
                         <Log key={exercise.id}>
                             <Box>
                                 <h2>{exercise.title}</h2>
                                 {exercise.logs.map((log) => (
                                 <>
+                                
                                 <p>
                                     Repetion count: {log.repetition_count}
                                 </p>
@@ -59,9 +62,11 @@ function LogList({user, setUser}) {
                                 <Button as={Link} to={`/update_log/${log.id}`}>
                                     Update log
                                 </Button>
+                            
                                 </>))}
                             </Box>
                         </Log>
+                        </>
                     ))
                 ) : (
                     <h2>No Logs Found</h2>

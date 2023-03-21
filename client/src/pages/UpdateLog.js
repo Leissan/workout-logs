@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
 
-function UpdateLog({user, setUser}) {
+function UpdateLog({user, setUser, log_id, repetition_count, repetition_type}) {
     // const [exercise_id, setExerciseId] = useState(null)
     // const [repetitionCount, setRepetitionCount] = useState(null)
     // const [repetitionType, setRepetitionType] = useState(null)
@@ -22,7 +22,7 @@ function UpdateLog({user, setUser}) {
                 setLog(r)
                 console.log("!!!!!!!!!!!!")
                 console.log(log)
-                // console.log(log.description)
+                
             });
     }, [])
     //use id to find the appropriate log -> user.logs, find the log there
@@ -31,7 +31,7 @@ function UpdateLog({user, setUser}) {
         e.preventDefault();
         setIsLoading(true);
         fetch(`/logs/${id}`, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -50,7 +50,7 @@ function UpdateLog({user, setUser}) {
         });
     }
 
- //a way to pull onChnage for every type of field i have below 
+ // field is the way to pull onChange for every type of field i have below 
  //for example onChange={onChange("exercise_id")}
     const onChange = (field) => (event) => {
 
@@ -58,7 +58,6 @@ function UpdateLog({user, setUser}) {
         return event
     }
 
-   
 
     return (
         <Wrapper>
@@ -66,15 +65,6 @@ function UpdateLog({user, setUser}) {
                 <h2>Update Log</h2>
                 {log ?
                     <form onSubmit={handleSubmit}>
-                        <FormField>
-                            <Label htmlFor="exercise_id">Exercise ID</Label>
-                            <Input
-                                type="number"
-                                id="exercise_id"
-                                value={log.exercise_id}
-                                onChange={onChange("exercise_id")}
-                            />
-                        </FormField>
                         <FormField>
                             <Label htmlFor="exercise_title">Exercise title</Label>
                             <Input
@@ -100,6 +90,8 @@ function UpdateLog({user, setUser}) {
                                 id="repetitionCount"
                                 value={log.repetition_count}
                                 onChange={onChange("repetition_count")}
+                                
+                                
                             />
                         </FormField>
                         <FormField>

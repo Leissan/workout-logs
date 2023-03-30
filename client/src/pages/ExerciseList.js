@@ -13,11 +13,11 @@ function ExerciseList({user}) {
             <Wrapper>
             
                  {
-                 user.exercises.map((exercise) => (
+                 user.all_exercises.map((exercise) => (
                        
                      <Exercise key={exercise.id}>
                          <Box>
-                             <h2>{<Link to = {`/exercises/${exercise.id}`}>{exercise.title}</Link>}</h2>
+                             <h2>{exercise.title}</h2>
                              <ReactMarkdown>{exercise.description}</ReactMarkdown>
                          </Box>
                      </Exercise>

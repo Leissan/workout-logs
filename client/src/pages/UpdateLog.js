@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
@@ -9,7 +9,7 @@ function UpdateLog({user, onUpdateLog}) {
     const [log, setLog] = useState(null)
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const history = useHistory();
+    const navigate = useNavigate();
     const { id } = useParams()
 
     const [logs, setLogs] = useState(user.logs);
@@ -46,7 +46,7 @@ function UpdateLog({user, onUpdateLog}) {
             }
             setIsLoading(false);
             onUpdateLog(log); // call callback function here
-            history.push("/history");
+            navigate("/history");
         }).catch((err) => {
             setErrors(["Something went wrong. Please try again."]);
             setIsLoading(false);

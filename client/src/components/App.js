@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
 import NewExercise from "../pages/NewExercise";
@@ -103,34 +103,33 @@ function App() {
   if (!user) return <Login onLogin={setUser} />;
 
   return (
-    <BrowserRouter>
+    <>
       <NavBar user={user} setUser={setUser} />
       <main>
-        <Switch>
-          <Route path="/new_exercise">
-            <NewExercise user={user} setUser={setUser} />
+        <Routes>
+        
+          <Route path="/new_exercise" element={<NewExercise user={user} setUser={setUser}/>}>
           </Route>
-          <Route path="/exercises">
-            <ExerciseList user={user} />
+          <Route path="/exercises" element={<ExerciseList user={user} />}>
           </Route>
-          <Route path="/new_logs">
-            <NewLog user={user} onCreateLog={handleCreateLog} />
+          <Route path="/exercises/:id" element={<Show user={user} setUser={setUser}/>}>
+   
           </Route>
-          <Route path="/update_log/:id">
-            <UpdateLog user={user} onUpdateLog={handleUpdateLog} />
-          <Route path="/exercises/:id">
-            <Show user={user} setUser={setUser}/>
+          <Route path="/new_logs" element={<NewLog user={user} onCreateLog={handleCreateLog} />}>  
           </Route>
+          <Route path="/update_log/:id"  element={<UpdateLog user={user} onUpdateLog={handleUpdateLog} />}>
+            
+          
           </Route>
-          <Route path="/history">
-            <LogList user={user} setUser={setUser} onDelete={handleDeleteLog}/>
+          <Route path="/history" element={<LogList user={user} setUser={setUser} onDelete={handleDeleteLog}/>}>
+            
           </Route>
-          <Route path="/">
-            <LogList user={user} />
+          <Route path="/" element={<LogList user={user} />}>
+            
           </Route>
-        </Switch>
+        </Routes>
       </main>
-    </BrowserRouter>
+    </>
   );
 }
 

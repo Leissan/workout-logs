@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useHistory, withRouter} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
@@ -11,7 +11,8 @@ function NewLog({user, onCreateLog}) {
     const [repetitionType, setRepetitionType] = useState(null)
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const history = useHistory();
+    // const history = useHistory();
+    const navigate = useNavigate();
 
     const [logs, setLogs] = useState(user.logs);
 
@@ -20,7 +21,8 @@ function NewLog({user, onCreateLog}) {
     };
 
 
-    function handleSubmit() {
+    function handleSubmit(e) {
+        e.preventDefault();
         const logData = { exercise_id: exerciseId, repetition_count: repetitionCount, repetition_type: repetitionType };
         fetch("/logs", {
             method: "POST",
@@ -34,7 +36,7 @@ function NewLog({user, onCreateLog}) {
                 setLogs((prevLogs) => [...prevLogs, log]);
                 setIsLoading(false);
                 onCreateLog(log); // call callback function here
-                history.push("/history");
+                navigate("/history");
             })
             .catch((err) => {
                 setErrors(["Something went wrong. Please try again."]);
@@ -106,4 +108,4 @@ const WrapperChild = styled.div`
   flex: 1;
 `;
 
-export default withRouter(NewLog);
+export default NewLog;

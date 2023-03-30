@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
@@ -9,7 +9,7 @@ function NewExercise({ user, setUser }) {
     const [description, setDescription] = useState(`Here's how you make it.`);
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -27,10 +27,10 @@ function NewExercise({ user, setUser }) {
             setIsLoading(false);
             if (r.ok) {
                 r.json().then ((newexercise) => {
-                const exercises = user.exercises
+                const exercises = user.all_exercises
                setTitle("")
                setDescription("")
-               setUser({...user, exercises: [...exercises, newexercise]})
+               setUser({...user, all_exercises: [...exercises, newexercise]})
                  } )
               
                

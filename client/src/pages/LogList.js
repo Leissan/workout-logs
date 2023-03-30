@@ -17,15 +17,19 @@ function LogList({user, setUser}) {
 
     function handleDeleteLog(id) {
         const updatedLogs = user.logs.filter((log) => log.id !== id)
+        // const deletedLog = user.logs.filter((log) => log.id == id)
+        // if deletedLog.exercise_id == exercise.id
         console.log(user.logs)
         // setUser({...user,
         //     exercises: {
         //         ...user.exercises,
         //         logs: updatedLogs
         //     } })
+
+
         // which exrecse the log belongs to
-        // if this exrecise only had that one log - delete noth log and exercise
-        //if it has more than one log, lete that log from that execise and display the rest of logs
+        // if this exrecise only had that one log - delete both log and exercise
+        //if it has more than one log, delete that log from that execise and display the rest of logs
         setUser({...user, logs: updatedLogs})
     }
 

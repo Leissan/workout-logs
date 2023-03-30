@@ -32,6 +32,7 @@ function NewExercise({ user, setUser }) {
                setDescription("")
                setUser({...user, exercises: [...exercises, newexercise]})
                console.log(newexercise)
+               console.log(exercises)
                  } )
               
                

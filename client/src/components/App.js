@@ -11,7 +11,7 @@ import UpdateLog from "../pages/UpdateLog";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [exer, setExer] = useState("")
+  // const [exer, setExer] = useState("")
 
   useEffect(() => {  
     // auto-login
@@ -34,6 +34,9 @@ function App() {
           <Route path="/new_exercise">
             <NewExercise user={user} setUser={setUser} />
           </Route>
+          <Route path="/exercises/:id">
+            <Show user={user} setUser={setUser}/>
+          </Route>
           <Route path="/exercises">
             <ExerciseList user={user} />
           </Route>
@@ -42,10 +45,9 @@ function App() {
           </Route>
           <Route path="/update_log/:id">
             <UpdateLog user={user} setUser={setUser} />
-          <Route path="/exercises/:id">
-            <Show user={user} setUser={setUser}/>
           </Route>
-          </Route>
+          
+          
           <Route path="/history">
             <LogList user={user} setUser={setUser} />
           </Route>

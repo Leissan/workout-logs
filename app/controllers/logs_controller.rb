@@ -20,7 +20,7 @@ class LogsController < ApplicationController
           }
         end
     
-        render json: list
+        render json: logs
     end
     
     def show

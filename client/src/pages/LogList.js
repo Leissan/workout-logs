@@ -5,32 +5,10 @@ import styled from "styled-components";
 import {Box, Button} from "../styles";
 
 
-function LogList({user, setUser}) {
-   
-    const deleteLog = (id) => {
-        console.log("?????", id)
-        fetch(`/logs/${id}`, {method: "DELETE"})
-         
-        handleDeleteLog(id)
-            
-    }
-
+function LogList({user, setUser, onDelete}) {
     function handleDeleteLog(id) {
-        const updatedLogs = user.logs.filter((log) => log.id !== id)
-        // const deletedLog = user.logs.filter((log) => log.id == id)
-        // if deletedLog.exercise_id == exercise.id
-        console.log(user.logs)
-        // setUser({...user,
-        //     exercises: {
-        //         ...user.exercises,
-        //         logs: updatedLogs
-        //     } })
-
-
-        // which exrecse the log belongs to
-        // if this exrecise only had that one log - delete both log and exercise
-        //if it has more than one log, delete that log from that execise and display the rest of logs
-        setUser({...user, logs: updatedLogs})
+        fetch(`/logs/${id}`, {method: "DELETE"})
+        onDelete(id)
     }
 
     return (
@@ -63,7 +41,7 @@ function LogList({user, setUser}) {
                                     Was made at: {log.log_date}
                                 </p>
                                 
-                                <Button as={Link} onClick={() => deleteLog(log.id)}>
+                                <Button as={Link} onClick={() => handleDeleteLog(log.id)}>
                                     Delete log
                                 </Button>
                                 <Button as={Link} to={`/update_log/${log.id}`}>

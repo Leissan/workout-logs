@@ -1,85 +1,65 @@
-import React, {useEffect, useState, useTransition} from "react";
-import {useHistory} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useHistory, withRouter} from "react-router-dom";
 import styled from "styled-components";
-import ReactMarkdown from "react-markdown";
 import {Link} from "react-router-dom";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
 
 
-function NewLog({user, setUser}) {
-    const [title, setTitle] = useState("My Awesome Exercise");
-    const [description, setDescription] = useState("");
-    const [exerciseId, setExerciseId] = useState(user.all_exercises[0].id || null)
+function NewLog({user, onCreateLog}) {
+    const [exerciseId, setExerciseId] = useState(user.all_exercises[0].id)
     const [repetitionCount, setRepetitionCount] = useState(null)
     const [repetitionType, setRepetitionType] = useState(null)
     const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false); 
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
-     const [optionValue, setOptionValue] = useState("");
 
-  const handleSelect = (e) => {
-    console.log(e.target.value);
-    setExerciseId(e.target.value);
-  };
+    const [logs, setLogs] = useState(user.logs);
+
+    const handleSelect = (e) => {
+        setExerciseId(e.target.value);
+    };
 
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        setIsLoading(true);
+    function handleSubmit() {
+        const logData = { exercise_id: exerciseId, repetition_count: repetitionCount, repetition_type: repetitionType };
         fetch("/logs", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                exercise_id: exerciseId,
-                repetition_type: repetitionType,
-                repetition_count: repetitionCount,
-            }),
-        }).then((r) => {
-            setIsLoading(false);
-            if (r.ok) {
-                r.json().then((newlog) => {
-                // const logs = user.logs
-                // setRepetitionCount("")
-                // setRepetitionType("")
-                setUser(newlog)
-                //redirect 
+            body: JSON.stringify(logData),
+        })
+            .then((r) => r.json())
+            .then((log) => {
+                setLogs((prevLogs) => [...prevLogs, log]);
+                setIsLoading(false);
+                onCreateLog(log); // call callback function here
                 history.push("/history");
-
-                // setUser({...user,
-                //     exercises: {
-                //         ...user.exercises,
-                //         logs: newlog
-                //     } })
-            
-                console.log(newlog)
-                })
-
-            } else {
-                r.json().then((err) => setErrors(err.errors));
-            }
-        });
+            })
+            .catch((err) => {
+                setErrors(["Something went wrong. Please try again."]);
+                setIsLoading(false);
+            });
     }
 
     return (
         <Wrapper>
             <WrapperChild>
-                <h2>Create Log</h2>  
+                <h2>Create Log</h2>
                 <form onSubmit={handleSubmit}>
                     <FormField>
-                    <select onChange={handleSelect}>
-                        {user.all_exercises.map(item => {
-                          return (<option value={item.id} key={item.id} >Logging my {item.title}</option>);
-                     })}
-                    </select>
+                        <select onChange={handleSelect}>
+                            {user.all_exercises.map(item => {
+                                return (<option value={item.id} key={item.id}>Logging my {item.title}</option>);
+                            })}
+                        </select>
                     </FormField>
                     <h3>Don't see the exercise you want to log? Create it here! </h3>
                     <div style={{marginBottom: 24}}>
                         <Button as={Link} to="/new_exercise">
                             Add new exercise
                         </Button>
-                    </div> 
+                    </div>
                     <FormField>
                         <Label htmlFor="repetitionCount">Repetition count</Label>
                         <Input
@@ -126,4 +106,4 @@ const WrapperChild = styled.div`
   flex: 1;
 `;
 
-export default NewLog;
+export default withRouter(NewLog);

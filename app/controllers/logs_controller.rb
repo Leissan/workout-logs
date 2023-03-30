@@ -4,38 +4,39 @@ class LogsController < ApplicationController
 
     def index
         logs = Log.where(user_id: current_user.id)
-        list = []
+        # list = []
     
-        logs.each do |log|
-          exercise = log.exercise
+        # logs.each do |log|
+        #   exercise = log.exercise
     
-          list << {
-            id: log.id,
-            title: exercise.title,
-            exercise_id: exercise.id,
-            description: exercise.description,
-            repetition_type: log.repetition_type,
-            repetition_count: log.repetition_count,
-            log_date: log.log_date,
-          }
-        end
+        #   list << {
+        #     id: log.id,
+        #     title: exercise.title,
+        #     exercise_id: exercise.id,
+        #     description: exercise.description,
+        #     repetition_type: log.repetition_type,
+        #     repetition_count: log.repetition_count,
+        #     log_date: log.log_date,
+        #   }
+        # end
     
         render json: logs
     end
     
     def show
         log = Log.find(params[:id])
-        exercise = log.exercise
+        render json: log
+        # exercise = log.exercise
     
-        render json: {
-          id: log.id,
-          exercise_id: exercise.id,
-          title: exercise.title,
-          description: exercise.description,
-          repetition_type: log.repetition_type,
-          repetition_count: log.repetition_count,
-          log_date: log.log_date,
-        }
+        # render json: {
+        #   id: log.id,
+        #   exercise_id: exercise.id,
+        #   title: exercise.title,
+        #   description: exercise.description,
+        #   repetition_type: log.repetition_type,
+        #   repetition_count: log.repetition_count,
+        #   log_date: log.log_date,
+        # }
     end
     
     def update

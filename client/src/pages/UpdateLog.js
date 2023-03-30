@@ -5,53 +5,56 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import {Button, Error, FormField, Input, Label, Textarea} from "../styles";
 
-function UpdateLog({user, setUser, log_id, repetition_count, repetition_type}) {
-    // const [exercise_id, setExerciseId] = useState(null)
-    // const [repetitionCount, setRepetitionCount] = useState(null)
-    // const [repetitionType, setRepetitionType] = useState(null)
+function UpdateLog({user, onUpdateLog}) {
     const [log, setLog] = useState(null)
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
     const { id } = useParams()
 
+    const [logs, setLogs] = useState(user.logs);
+
     useEffect(() => {
-        fetch(`/logs/${id}`)
-            .then((r) => r.json())
-            .then((r) => {
-                setLog(r)
-                console.log("!!!!!!!!!!!!")
-                console.log(log)
-                
-            });
-    }, [])
-    //use id to find the appropriate log -> user.logs, find the log there
-    // map  with if else, if this is the one i wanna chnage : return obj
+        const foundLog = user.logs.find((log) => {
+            return log.id == id
+        });
+        if (foundLog) {
+            setLog(foundLog);
+        }
+    }, [id]);
+
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
+
+        const logData = { exercise_id: log.exercise_id, repetition_count: log.repetition_count, repetition_type: log.repetition_type };
+
         fetch(`/logs/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                exercise_id: log.exercise_id,
-                repetition_type: log.repetition_type,
-                repetition_count: log.repetition_count,
-            }),
-        }).then((r) => {
+            body: JSON.stringify(logData),
+        }).then((r) => r.json())
+            .then((log) => {
             setIsLoading(false);
-            if (r.ok) {
-                history.push("/history");
+            if (id) {
+                const updatedLogs = logs.map((l) => (l.id == log.id ? log : l));
+                setLogs(updatedLogs);
             } else {
-                r.json().then((err) => setErrors(err.errors));
+                setLogs((prevLogs) => [...prevLogs, log]);
             }
+            setIsLoading(false);
+            onUpdateLog(log); // call callback function here
+            history.push("/history");
+        }).catch((err) => {
+            setErrors(["Something went wrong. Please try again."]);
+            setIsLoading(false);
         });
     }
 
- // field is the way to pull onChange for every type of field i have below 
- //for example onChange={onChange("exercise_id")}
+ // field is the way to pull onChange for every type of field i have below
+ // for example onChange={onChange("exercise_id")}
     const onChange = (field) => (event) => {
 
         setLog({ [field]: event.target.value })

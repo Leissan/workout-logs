@@ -11,7 +11,7 @@ import UpdateLog from "../pages/UpdateLog";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [exer, setExer] = useState("")
+  // const [exer, setExer] = useState("")
 
   useEffect(() => {  
     // auto-login
@@ -107,25 +107,25 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Routes>
-        
           <Route path="/new_exercise" element={<NewExercise user={user} setUser={setUser}/>}>
           </Route>
+
           <Route path="/exercises" element={<ExerciseList user={user} />}>
           </Route>
-          <Route path="/exercises/:id" element={<Show user={user} setUser={setUser}/>}>
-   
+
+          <Route path="/exercises/:id" element={<Show user={user} setUser={setUser}/>}>   
           </Route>
+
           <Route path="/new_logs" element={<NewLog user={user} onCreateLog={handleCreateLog} />}>  
           </Route>
-          <Route path="/update_log/:id"  element={<UpdateLog user={user} onUpdateLog={handleUpdateLog} />}>
-            
-          
+
+          <Route path="/update_log/:id"  element={<UpdateLog user={user} onUpdateLog={handleUpdateLog} />}>          
           </Route>
-          <Route path="/history" element={<LogList user={user} setUser={setUser} onDelete={handleDeleteLog}/>}>
-            
+
+          <Route path="/history" element={<LogList user={user} setUser={setUser} onDelete={handleDeleteLog}/>}>           
           </Route>
-          <Route path="/" element={<LogList user={user} />}>
-            
+
+          <Route path="/" element={<LogList user={user} />}>         
           </Route>
         </Routes>
       </main>

@@ -1,93 +1,51 @@
-Requirements
-For this project, you must:
 
-Use a Rails API backend with a React frontend.
-Have at least three models on the backend, that include the following:
-At least one reciprocal many-to-many relationship (implemented by using 2 has-many-through relationships). Note: in order to accomplish this, your project must include a joins table. This joins table must include a user submittable attribute.
-Full CRUD actions for at least one resource. The update action should be implemented using a form that is pre-filled with existing values for the object. On submission of the form, the object should update. Note: Using a like button or similar will not meet the update requirement.
-Minimum of create and read actions for EACH resource.
-Follow RESTful routing convention for backend routes.
-Active Record validations must be present on your models for most attributes.
-Use controller validations to alter back end json response to front end. The response should pass your object if the creation, update, or deletion succeeds. However, the response should pass error messages to the front end and display them if the action fails. HINT: Utilize record.errors.
-Properly update front end state upon successful response from a POST, PATCH, or DELETE request. That is to say, you should NOT rely on another GET request or redirect to update front end state of your application.
-Have at least three different client-side routes using React Router. Be sure to include a nav bar or other UI element that allows users to navigate between routes. Follow RESTful convention where applicable.
-Implement authentication/authorization, including password protection. A user must be able to:
-sign up with a new user account,
-log in to the site with a secure password and stay logged in via user ID in the session hash, and
-log out of the site.
-Use the React hook useContext to persist your logged in user object in front end state and avoid props drilling.
-Note: a user should only be able to edit and delete resources if they are logged in and the creator of that resource. For example, if we consider the example described below with models of User, DogHouse, and Review, I would only be able to edit or delete the reviews that I created.
+# Workout Logs
+
+This is an app for created for those who like to keep track of their workouts by logging them, as well as add new workouts to the routine! 
+As a user of my app, I can:
+
+* Sign up for an account,
+* Log in to the site & remain logged in,
+* Log out,
+* View a list of all exercises that I have performed and my logs of these exercises,
+* Create a log for one specific exercise,
+* Modify or delete a log that I created,
+* Create a new exercise!
 
 
+## Description
+
+* When you open up an app, you will see a login page which will give you an option to log in or sign up, if you dont already have an account
+* Once you login, you will be taken to the page where you can create a new log for that exercises that you just finished working on. If this is a new exercise for you, there will be an option to add it to your list of exercises, and then create a log for it. 
+* Once you create a log, it will automatically take you to the page with all of your logs, with the latest one proudly displayed there
+* You also have an option to view a list of all available exercises, with their full description.
+* Your logs will only be specific to you, and a different user will not be able to see, add, update, or delete your logs. 
+
+## Behind the scenes
+
+It is a full-stack application where I applied my knowledge of:
+
+* Rails API backend that uses Active Record to access and persist data in the database, with React frontend
+* User authentication and authorization
+* Active Record validations
+* Many-to-many relationship implemented by using two has-many-through relationships (user, exercises, and logs as the joins table)
+* full CRUD capabilities for the logs model
+* following RESTful routing conventions for backend routes
+* frontend State management
 
 
-# Getting Started with Create React App
+## Usage
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```react
 
-## Available Scripts
+npm start
 
-In the project directory, you can run:
+```
 
-### `npm start`
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Please make sure to update tests as appropriate.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

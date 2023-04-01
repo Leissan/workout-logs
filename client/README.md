@@ -1,13 +1,13 @@
 
 # Workout Logs
 
-This is an app for created for those who like to keep track of their workouts by logging them, as well as add new workouts to the routine! 
+This is an app created for those who like to keep track of their workouts by logging them, as well as add new workouts to the routine! 
 As a user of my app, I can:
 
 * Sign up for an account,
 * Log in to the site & remain logged in,
 * Log out,
-* View a list of all exercises that I have performed and my logs of these exercises,
+* View a list of all exercises and my logs of these exercises,
 * Create a log for one specific exercise,
 * Modify or delete a log that I created,
 * Create a new exercise!
@@ -15,9 +15,9 @@ As a user of my app, I can:
 
 ## Description
 
-* When you open up an app, you will see a login page which will give you an option to log in or sign up, if you dont already have an account
-* Once you login, you will be taken to the page where you can create a new log for that exercises that you just finished working on. If this is a new exercise for you, there will be an option to add it to your list of exercises, and then create a log for it. 
-* Once you create a log, it will automatically take you to the page with all of your logs, with the latest one proudly displayed there
+* When you open up an app, you will see a login page which will give you an option to log in or sign up, if you don't already have an account.
+* Once you login, you will be taken to the page where you can create a new log for that exercise that you just finished working on. If this is a new exercise for you, there will be an option to add it to your list of exercises, and then create a log for it. 
+* Once you create a log, it will automatically take you to the page with all of your logs, with the latest one proudly displayed there.
 * You also have an option to view a list of all available exercises, with their full description.
 * Your logs will only be specific to you, and a different user will not be able to see, add, update, or delete your logs. 
 
@@ -29,9 +29,9 @@ It is a full-stack application where I applied my knowledge of:
 * User authentication and authorization
 * Active Record validations
 * Many-to-many relationship implemented by using two has-many-through relationships (user, exercises, and logs as the joins table)
-* full CRUD capabilities for the logs model
-* following RESTful routing conventions for backend routes
-* frontend State management
+* Full CRUD capabilities for the logs model
+* Following RESTful routing conventions for backend routes
+* Frontend State management
 
 
 ## Usage

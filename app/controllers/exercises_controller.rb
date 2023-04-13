@@ -15,9 +15,6 @@ class ExercisesController < ApplicationController
         render json: exercise, status: :ok
       end
     
-      # def destroy
-      #   exercise.destroy
-      # end
     
       private
     

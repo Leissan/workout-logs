@@ -33,7 +33,7 @@ function NewLog({user, onCreateLog}) {
         })
             .then((r) => r.json())
             .then((log) => {
-                setLogs((prevLogs) => [...prevLogs, log]);
+                setLogs((prevLogs) => [log, ...prevLogs]);
                 setIsLoading(false);
                 onCreateLog(log); // call callback function here
                 navigate("/history");

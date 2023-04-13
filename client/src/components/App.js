@@ -11,7 +11,6 @@ import UpdateLog from "../pages/UpdateLog";
 
 function App() {
   const [user, setUser] = useState(null);
-  // const [exer, setExer] = useState("")
 
   useEffect(() => {  
     // auto-login

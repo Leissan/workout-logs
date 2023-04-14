@@ -14,13 +14,13 @@ class LogsController < ApplicationController
     end
     
     def update
-        Log.find(params[:id]).update(log_date: DateTime.now, logs_params)
+        Log.find(params[:id]).update(log_date: DateTime.now, **logs_params)
         render json: log, status: :ok
     end
 
     
     def create
-        log = Log.create(user_id: current_user.id, log_date: DateTime.now, logs_params)
+        log = Log.create(user_id: current_user.id, log_date: DateTime.now, **logs_params)
         render json: log, status: :ok
     end
     

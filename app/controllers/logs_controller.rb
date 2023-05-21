@@ -50,3 +50,4 @@ class LogsController < ApplicationController
         params.permit(:log_date, :repetition_type, :repetition_count, :exercise_id)
     end  
 end
+

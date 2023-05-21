@@ -14,8 +14,16 @@ class ExercisesController < ApplicationController
         exercise = Exercise.create(exercise_params)
         render json: exercise, status: :ok
       end
-    
-    
+
+   
+      def my-bycep-exercises
+        exercises = current_user.exercises.select do |e|
+          e.title.include?("bycep")
+        end
+
+        render json: exercises
+
+      end
       private
     
       def exercise
